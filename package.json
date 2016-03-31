@@ -1,0 +1,24 @@
+{
+  "name": "css-slam",
+  "version": "0.0.1",
+  "description": "Minimal CSS, fast",
+  "main": "index.js",
+  "scripts": {
+    "test": "eslint bin/css-slam **/*.js"
+  },
+  "author": "The Polymer Authors",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "command-line-args": "^2.1.6",
+    "dom5": "^1.3.1",
+    "shady-css-parser": "0.0.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^2.5.3",
+    "mocha": "^2.4.5"
+  },
+  "engines": {
+    "node": ">=4"
+  }
+}
