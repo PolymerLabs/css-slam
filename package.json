@@ -4,7 +4,7 @@
   "description": "Minimal CSS, fast",
   "main": "index.js",
   "scripts": {
-    "test": "eslint bin/css-slam **/*.js"
+    "test": "eslint bin/css-slam **/*.js && mocha --ui tdd"
   },
   "author": "The Polymer Authors",
   "license": "BSD-3-Clause",
