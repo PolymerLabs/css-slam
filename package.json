@@ -20,5 +20,13 @@
   },
   "engines": {
     "node": ">=4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PolymerLabs/css-slam.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PolymerLabs/css-slam/issues"
+  },
+  "homepage": "https://github.com/PolymerLabs/css-slam#readme"
 }
