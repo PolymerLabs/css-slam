@@ -9,10 +9,10 @@
  */
 'use strict';
 const dom5 = require('dom5');
-const shadyCss = require('shady-css-parser');
+const shadyCSS = require('shady-css-parser');
 
-class NoCommentStringifier extends shadyCss.Stringifier {
-  [shadyCss.nodeType.comment](node) {
+class NoCommentStringifier extends shadyCSS.Stringifier {
+  [shadyCSS.nodeType.comment](node) {
     if (node.value.indexOf('@license') >= 0) {
       return node.value;
     }
@@ -20,24 +20,24 @@ class NoCommentStringifier extends shadyCss.Stringifier {
   }
 }
 
-const parser = new shadyCss.Parser();
+const parser = new shadyCSS.Parser();
 const stringifier = new NoCommentStringifier();
+const pred = dom5.predicates;
+const isInlineStyle = pred.AND(
+  pred.hasTagName('style'),
+  pred.OR(
+    pred.NOT(
+      pred.hasAttr('type')
+    ),
+    pred.hasAttrValue('type', 'text/css')
+  )
+);
 
 /**
  * Transforms all inline styles in `html` with `filter`
  */
 function html(text) {
-  var p = dom5.predicates;
-  var ast = dom5.parse(text);
-  var isInlineStyle = p.AND(
-    p.hasTagName('style'),
-    p.OR(
-      p.NOT(
-        p.hasAttr('type')
-      ),
-      p.hasAttrValue('type', 'text/css')
-    )
-  );
+  const ast = dom5.parse(text);
   for (let styleNode of dom5.queryAll(ast, isInlineStyle)) {
     const text = dom5.getTextContent(styleNode);
     dom5.setTextContent(styleNode, css(text));
