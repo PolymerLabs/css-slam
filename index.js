@@ -12,9 +12,10 @@ const dom5 = require('dom5');
 const shadyCSS = require('shady-css-parser');
 
 class NoCommentStringifier extends shadyCSS.Stringifier {
-  [shadyCSS.nodeType.comment](node) {
-    if (node.value.indexOf('@license') >= 0) {
-      return node.value;
+  comment(node) {
+    const value = node.value;
+    if (value.indexOf('@license') >= 0) {
+      return value;
     }
     return '';
   }
