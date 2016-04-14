@@ -39,10 +39,10 @@ const isInlineStyle = pred.AND(
  */
 function html(text) {
   const ast = dom5.parse(text);
-  for (let styleNode of dom5.queryAll(ast, isInlineStyle)) {
+  dom5.queryAll(ast, isInlineStyle).forEach(styleNode => {
     const text = dom5.getTextContent(styleNode);
     dom5.setTextContent(styleNode, css(text));
-  }
+  });
   return dom5.serialize(ast);
 }
 
