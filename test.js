@@ -14,6 +14,7 @@ chai.config.showDiff = true;
 const assert = chai.assert;
 
 const slam = require('./');
+const File = require('vinyl');
 
 suite('css-slam', () => {
   suite('CSS', () => {
@@ -95,5 +96,51 @@ suite('css-slam', () => {
       assert.equal(dom5.getTextContent(styles[0]), ':root{--foo:red;}');
       assert.equal(dom5.getTextContent(styles[1]), 'div{color:var(--foo);}');
     });
+  });
+
+  suite('Gulp', () => {
+    test('Process css files in stream', (done) => {
+      const f = new File({
+        path: 'foo.css',
+        contents: new Buffer('/* foo */ :root { }')
+      })
+      slam.gulp()._transform(f, 'utf-8', (err, file) => {
+        if (err) {
+          return done(err);
+        }
+        assert.equal(f, file);
+        assert.equal(f.contents.toString(), ':root{}');
+        done();
+      })
+    });
+    test('Process html files in stream', (done) => {
+      const f = new File({
+        path: 'foo.html',
+        contents: new Buffer('<!doctype html><style>\n\t:root{\n--foo: red;\n}</style>')
+      })
+      slam.gulp()._transform(f, 'utf-8', (err, file) => {
+        if (err) {
+          return done(err);
+        }
+        assert.equal(f, file);
+        assert.equal(f.contents.toString(), '<!DOCTYPE html><html><head><style>:root{--foo:red;}</style></head><body></body></html>');
+        done();
+      })
+    });
+    test('Leave unknown files in stream alone', (done) => {
+      const b = new Buffer('<!doctype html><style>\n\t:root{\n--foo: red;\n}</style>');
+      const f = new File({
+        path: 'foo.bar',
+        contents: b
+      });
+      slam.gulp()._transform(f, 'utf-8', (err, file) => {
+        if (err) {
+          return done(err);
+        }
+        assert.equal(f, file);
+        assert.equal(f.contents, b);
+        done();
+      });
+    })
   });
 });

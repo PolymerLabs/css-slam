@@ -10,6 +10,7 @@
 'use strict';
 const dom5 = require('dom5');
 const shadyCSS = require('shady-css-parser');
+const stream = require('stream');
 
 class NoCommentStringifier extends shadyCSS.Stringifier {
   comment(node) {
@@ -50,4 +51,30 @@ function css(text) {
   return stringifier.stringify(parser.parse(text));
 }
 
-module.exports = {html, css};
+class GulpTransform extends stream.Transform {
+  constructor() {
+    super({objectMode: true});
+  }
+  _transform(file, encoding, callback) {
+    if (file.isStream()) {
+      return callback(new Error('css-slam does not support streams'));
+    }
+    if (file.contents) {
+      let contents;
+      if (file.path.slice(-5) === '.html') {
+        contents = file.contents.toString();
+        file.contents = new Buffer(html(contents));
+      } else if (file.path.slice(-4) === '.css') {
+        contents = file.contents.toString();
+        file.contents = new Buffer(css(contents));
+      }
+    }
+    callback(null, file);
+  }
+}
+
+function gulp() {
+  return new GulpTransform();
+}
+
+module.exports = {html, css, gulp};
