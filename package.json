@@ -1,6 +1,6 @@
 {
   "name": "css-slam",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Minimal CSS, fast",
   "main": "index.js",
   "scripts": {
