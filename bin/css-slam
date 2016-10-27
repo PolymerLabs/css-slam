@@ -13,9 +13,10 @@
 const fs = require('fs');
 const path = require('path');
 const cliArgs = require('command-line-args');
+const getCliUsage = require('command-line-usage');
 const slam = require('../');
 
-const cli = cliArgs([
+const options = [
   {
     name: 'source',
     alias: 's',
@@ -37,16 +38,22 @@ const cli = cliArgs([
     type: Boolean,
     description: 'Print this message'
   }
-]);
+];
+
+const args = cliArgs(options);
 
 function getUsage() {
-  return cli.getUsage({
-    title: 'css-slam',
-    description: 'Minimal CSS, fast'
-  });
+  return getCliUsage([
+    {
+      header: 'css-slam',
+      content: 'Minimal CSS, fast'
+    },
+    {
+      header: 'Options',
+      optionList: options
+    }
+  ]);
 }
-
-const args = cli.parse();
 
 if (args.help) {
   console.log(getUsage());
