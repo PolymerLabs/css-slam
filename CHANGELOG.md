@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 <!-- New PRs should document their changes here. -->
 
+## [1.2.1] - 2016-11-01
+
+### Fixed
+
+* Improve support for node v6 by updating to command-line-args v3.
+
 ## [1.2.0] - 2016-05-25
 
 ### Fixed
