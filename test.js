@@ -90,7 +90,8 @@ suite('css-slam', () => {
         }
       </style>`;
       const dom5 = require('dom5');
-      const ast = dom5.parse(slam.html(text));
+      const parse5 = require('parse5');
+      const ast = parse5.parse(slam.html(text));
       const styles = dom5.queryAll(ast, dom5.predicates.hasTagName('style'));
       assert.equal(styles.length, 2);
       assert.equal(dom5.getTextContent(styles[0]), ':root{--foo:red;}');
