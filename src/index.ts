@@ -8,13 +8,14 @@
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
 'use strict';
-const dom5 = require('dom5');
-const parse5 = require('parse5');
-const shadyCSS = require('shady-css-parser');
-const stream = require('stream');
+import File = require('vinyl');
+import * as dom5 from 'dom5';
+import * as parse5 from 'parse5';
+import {Transform} from 'stream';
+import {Stringifier as CSSStringifier, Parser as CSSParser} from 'shady-css-parser';
 
-class NoCommentStringifier extends shadyCSS.Stringifier {
-  comment(node) {
+class NoCommentStringifier extends CSSStringifier {
+  comment(node: {value: string}): string {
     const value = node.value;
     if (value.indexOf('@license') >= 0) {
       return value;
@@ -23,7 +24,7 @@ class NoCommentStringifier extends shadyCSS.Stringifier {
   }
 }
 
-const parser = new shadyCSS.Parser();
+const parser = new CSSParser();
 const stringifier = new NoCommentStringifier();
 const pred = dom5.predicates;
 const isInlineStyle = pred.AND(
@@ -39,7 +40,7 @@ const isInlineStyle = pred.AND(
 /**
  * Transforms all inline styles in `html` with `filter`
  */
-function html(text) {
+export function html(text: string) {
   const ast = parse5.parse(text);
   dom5.queryAll(ast, isInlineStyle).forEach(styleNode => {
     const text = dom5.getTextContent(styleNode);
@@ -48,20 +49,21 @@ function html(text) {
   return parse5.serialize(ast);
 }
 
-function css(text) {
+export function css(text: string) {
   return stringifier.stringify(parser.parse(text));
 }
 
-class GulpTransform extends stream.Transform {
+
+export class GulpTransform extends Transform {
   constructor() {
     super({objectMode: true});
   }
-  _transform(file, encoding, callback) {
+  _transform(file: File, _encoding: string, callback: (err: Error|null, file?: File) => void) {
     if (file.isStream()) {
       return callback(new Error('css-slam does not support streams'));
     }
     if (file.contents) {
-      let contents;
+      let contents: string;
       if (file.path.slice(-5) === '.html') {
         contents = file.contents.toString();
         file.contents = new Buffer(html(contents));
@@ -74,8 +76,6 @@ class GulpTransform extends stream.Transform {
   }
 }
 
-function gulp() {
+export function gulp(): GulpTransform {
   return new GulpTransform();
 }
-
-module.exports = {html, css, gulp};

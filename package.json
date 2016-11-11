@@ -4,11 +4,16 @@
   "description": "Minimal CSS, fast",
   "main": "index.js",
   "scripts": {
-    "test": "eslint **/*.js && mocha --ui tdd"
+    "build": "tsc",
+    "lint": "eslint **/*.js",
+    "test": "npm run lint && mocha --ui tdd"
   },
   "author": "The Polymer Authors",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "@types/node": "^6.0.46",
+    "@types/parse5": "^2.2.34",
+    "@types/vinyl": "^1.2.30",
     "dom5": "^2.0.1",
     "parse5": "^2.2.3",
     "shady-css-parser": "0.0.8"
@@ -17,6 +22,7 @@
     "chai": "^3.5.0",
     "eslint": "^2.5.3",
     "mocha": "^2.4.5",
+    "typescript": "^2.0.9",
     "vinyl": "^1.1.1"
   },
   "engines": {
