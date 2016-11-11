@@ -9,6 +9,7 @@
  */
 'use strict';
 const dom5 = require('dom5');
+const parse5 = require('parse5');
 const shadyCSS = require('shady-css-parser');
 const stream = require('stream');
 
@@ -39,12 +40,12 @@ const isInlineStyle = pred.AND(
  * Transforms all inline styles in `html` with `filter`
  */
 function html(text) {
-  const ast = dom5.parse(text);
+  const ast = parse5.parse(text);
   dom5.queryAll(ast, isInlineStyle).forEach(styleNode => {
     const text = dom5.getTextContent(styleNode);
     dom5.setTextContent(styleNode, css(text));
   });
-  return dom5.serialize(ast);
+  return parse5.serialize(ast);
 }
 
 function css(text) {
