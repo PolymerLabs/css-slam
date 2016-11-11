@@ -13,7 +13,7 @@ const chai = require('chai');
 chai.config.showDiff = true;
 const assert = chai.assert;
 
-const slam = require('./');
+const slam = require('./lib/index');
 const File = require('vinyl');
 
 suite('css-slam', () => {
