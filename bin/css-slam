@@ -8,6 +8,11 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
+
+// NOTE(fks) 11-17-2016: This file is still being used in important Polymer
+// projects, even though it isn't included as an executable in package.json.
+// Please reach out to @FredKSchott or @azakus before removing.
+
 'use strict';
 
 const fs = require('fs');
