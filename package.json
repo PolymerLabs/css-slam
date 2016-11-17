@@ -4,11 +4,13 @@
   "description": "Minimal CSS, fast",
   "main": "index.js",
   "scripts": {
-    "test": "eslint **/*.js && mocha --ui tdd"
+    "test": "eslint bin/css-slam **/*.js && mocha --ui tdd"
   },
   "author": "The Polymer Authors",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "command-line-args": "^3.0.1",
+    "command-line-usage": "^3.0.5",
     "dom5": "^2.0.1",
     "parse5": "^2.2.3",
     "shady-css-parser": "0.0.8"
