@@ -14,6 +14,8 @@
     "@types/node": "^6.0.46",
     "@types/parse5": "^2.2.34",
     "@types/vinyl": "^1.2.30",
+    "command-line-args": "^3.0.1",
+    "command-line-usage": "^3.0.5",
     "dom5": "^2.0.1",
     "parse5": "^2.2.3",
     "shady-css-parser": "0.0.8"
