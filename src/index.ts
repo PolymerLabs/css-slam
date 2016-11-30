@@ -12,10 +12,10 @@ import File = require('vinyl');
 import * as dom5 from 'dom5';
 import * as parse5 from 'parse5';
 import {Transform} from 'stream';
-import {Stringifier as CSSStringifier, Parser as CSSParser} from 'shady-css-parser';
+import {Comment, Stringifier as CSSStringifier, Parser as CSSParser} from 'shady-css-parser';
 
 class NoCommentStringifier extends CSSStringifier {
-  comment(node: {value: string}): string {
+  comment(node: Comment): string {
     const value = node.value;
     if (value.indexOf('@license') >= 0) {
       return value;
@@ -40,7 +40,7 @@ const isInlineStyle = pred.AND(
 /**
  * Transforms all inline styles in `html` with `filter`
  */
-export function html(text: string) {
+export function html(text: string): string {
   const ast = parse5.parse(text);
   dom5.queryAll(ast, isInlineStyle).forEach(styleNode => {
     const text = dom5.getTextContent(styleNode);
@@ -49,7 +49,7 @@ export function html(text: string) {
   return parse5.serialize(ast);
 }
 
-export function css(text: string) {
+export function css(text: string): string {
   return stringifier.stringify(parser.parse(text));
 }
 
