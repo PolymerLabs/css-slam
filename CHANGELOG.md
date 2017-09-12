@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 <!-- New PRs should document their changes here. -->
 
+## [2.0.0] - 2017-09-11
+
+* Update shady-css-parser to v0.1.0
+* Update dom5 to v2
+* Drop testing of Node 4 and Node5
+* Add testing of Node 8
+* Update devDependencies to latest versions
+
 ## [1.2.1] - 2016-11-01
 
 ### Fixed
