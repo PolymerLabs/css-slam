@@ -13,16 +13,16 @@
     "command-line-usage": "^3.0.5",
     "dom5": "^2.0.1",
     "parse5": "^2.2.3",
-    "shady-css-parser": "0.0.8"
+    "shady-css-parser": "^0.1.0"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^2.5.3",
-    "mocha": "^2.4.5",
-    "vinyl": "^1.1.1"
+    "chai": "^4.1.2",
+    "eslint": "^4.6.1",
+    "mocha": "^3.5.3",
+    "vinyl": "^2.1.0"
   },
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "repository": {
     "type": "git",

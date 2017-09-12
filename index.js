@@ -41,7 +41,7 @@ const isInlineStyle = pred.AND(
  */
 function html(text) {
   const ast = parse5.parse(text);
-  dom5.queryAll(ast, isInlineStyle).forEach(styleNode => {
+  dom5.queryAll(ast, isInlineStyle, null, dom5.childNodesIncludeTemplate).forEach(styleNode => {
     const text = dom5.getTextContent(styleNode);
     dom5.setTextContent(styleNode, css(text));
   });
