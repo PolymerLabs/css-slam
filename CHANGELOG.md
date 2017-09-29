@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 <!-- New PRs should document their changes here. -->
+* Make sure `@apply` always has a semicolon at the end
 
 ## [2.0.0] - 2017-09-11
 
