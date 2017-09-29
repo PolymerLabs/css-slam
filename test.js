@@ -73,6 +73,17 @@ suite('css-slam', () => {
       const expected = '/* @license */:root{}';
       assert.equal(slam.css(text), expected);
     });
+    test('@apply missing semicolon is fixed', () => {
+      const text =
+      `:host {
+        @apply --foo
+      }
+      :root {
+        @apply(--bar)
+      }`;
+      const expected = `:host{@apply --foo;}:root{@apply (--bar);}`;
+      assert.equal(slam.css(text), expected);
+    })
   });
 
   suite('HTML', () => {
