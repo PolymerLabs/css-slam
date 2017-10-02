@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## Unreleased
 
 <!-- New PRs should document their changes here. -->
+## [2.0.2] - 2017-10-02
+
+* Enhance `@apply` detector to support the case with parens better
+
 ## [2.0.1] - 2017-09-29
 
 * Make sure `@apply` always has a semicolon at the end

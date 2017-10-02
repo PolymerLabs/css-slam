@@ -75,13 +75,21 @@ suite('css-slam', () => {
     });
     test('@apply missing semicolon is fixed', () => {
       const text =
-      `:host {
-        @apply --foo
+      `
+      button {
+        @apply(--whatever)
       }
-      :root {
-        @apply(--bar)
-      }`;
-      const expected = `:host{@apply --foo;}:root{@apply (--bar);}`;
+      span {
+        @apply (--whatever)
+      }
+      :host {
+        @apply --whatever
+      }
+      div {
+        color: red;
+      }
+      `;
+      const expected = `button{@apply (--whatever);}span{@apply (--whatever);}:host{@apply --whatever;}div{color:red;}`;
       assert.equal(slam.css(text), expected);
     })
   });

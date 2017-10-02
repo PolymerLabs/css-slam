@@ -48,7 +48,7 @@ function html(text) {
   return parse5.serialize(ast);
 }
 
-const APPLY_NO_SEMI = /@apply \(?--[\w-]+\)?[^;]/g;
+const APPLY_NO_SEMI = /@apply\s*\(?--[\w-]+\)?[^;]/g;
 
 function addSemi(match) {
   return match + ';';
