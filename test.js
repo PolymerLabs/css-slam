@@ -49,16 +49,16 @@ suite('css-slam', () => {
       `;
       const expected = [
         ':root{',
-        '--foo:red;',
-        '--border:2px solid black;',
-        '--thing:{',
-        'box-shadow:0 0 0 red;',
-        '};',
+          '--foo:red;',
+          '--border:2px solid black;',
+          '--thing:{',
+            'box-shadow:0 0 0 red;',
+          '};',
         '}',
         'div{',
-        'color:var(--foo, black);',
-        'border:var(--border, 10px dotted orange);',
-        '@apply --thing;',
+          'color:var(--foo, black);',
+          'border:var(--border, 10px dotted orange);',
+          '@apply --thing;',
         '}'
       ].join('');
       assert.equal(slam.css(text), expected);
