@@ -2,7 +2,7 @@
   "name": "css-slam",
   "version": "2.0.2",
   "description": "Minimal CSS, fast",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "eslint bin/css-slam **/*.js && mocha --ui tdd"
   },
@@ -11,11 +11,12 @@
   "dependencies": {
     "command-line-args": "^3.0.1",
     "command-line-usage": "^3.0.5",
-    "dom5": "^2.0.1",
-    "parse5": "^2.2.3",
+    "dom5": "^3.0.0",
+    "parse5": "^4.0.0",
     "shady-css-parser": "^0.1.0"
   },
   "devDependencies": {
+    "@types/vinyl": "^2.0.2",
     "chai": "^4.1.2",
     "eslint": "^4.8.0",
     "mocha": "^3.5.3",

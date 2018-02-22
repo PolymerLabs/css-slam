@@ -7,14 +7,14 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-'use strict';
-const dom5 = require('dom5');
-const parse5 = require('parse5');
-const shadyCSS = require('shady-css-parser');
-const stream = require('stream');
+import * as dom5 from 'dom5/lib/index-next';
+import * as parse5 from 'parse5';
+import * as shadyCSS from 'shady-css-parser';
+import * as stream from 'stream';
+import * as vinyl from 'vinyl';
 
 class NoCommentStringifier extends shadyCSS.Stringifier {
-  comment(node) {
+  comment(node: shadyCSS.Comment) {
     const value = node.value;
     if (value.indexOf('@license') >= 0) {
       return value;
@@ -39,31 +39,34 @@ const isInlineStyle = pred.AND(
 /**
  * Transforms all inline styles in `html` with `filter`
  */
-function html(text) {
+export function html(text: string) {
   const ast = parse5.parse(text);
-  dom5.queryAll(ast, isInlineStyle, null, dom5.childNodesIncludeTemplate).forEach(styleNode => {
+  const styleNodes = dom5.queryAll(
+      ast, isInlineStyle, dom5.childNodesIncludeTemplate);
+  for (const styleNode of styleNodes) {
     const text = dom5.getTextContent(styleNode);
     dom5.setTextContent(styleNode, css(text));
-  });
+  }
   return parse5.serialize(ast);
 }
 
 const APPLY_NO_SEMI = /@apply\s*\(?--[\w-]+\)?[^;]/g;
 
-function addSemi(match) {
+function addSemi(match: string) {
   return match + ';';
 }
 
-function css(text) {
+export function css(text: string) {
   text = text.replace(APPLY_NO_SEMI, addSemi);
   return stringifier.stringify(parser.parse(text));
 }
 
-class GulpTransform extends stream.Transform {
+export class GulpTransform extends stream.Transform {
   constructor() {
     super({objectMode: true});
   }
-  _transform(file, encoding, callback) {
+  _transform(file: vinyl, _encoding: string,
+             callback: (error: Error|null|undefined, file?: vinyl) => void) {
     if (file.isStream()) {
       return callback(new Error('css-slam does not support streams'));
     }
@@ -81,8 +84,6 @@ class GulpTransform extends stream.Transform {
   }
 }
 
-function gulp() {
+export function gulp() {
   return new GulpTransform();
 }
-
-module.exports = {html, css, gulp};
