@@ -8,6 +8,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitThis": true,
+    "strict": true,
     "strictNullChecks": true,
     "removeComments": false,
     "preserveConstEnums": true,
