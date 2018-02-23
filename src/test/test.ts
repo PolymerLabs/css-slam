@@ -7,14 +7,14 @@
  * Code distributed by Google as part of the polymer project is also
  * subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
  */
-const chai = require('chai');
-// const fs = require('fs');
+import * as chai from 'chai';
+import * as slam from '../index';
+
+import File = require('vinyl');
 
 chai.config.showDiff = true;
 const assert = chai.assert;
 
-const slam = require('./');
-const File = require('vinyl');
 
 suite('css-slam', () => {
   suite('CSS', () => {
@@ -62,7 +62,7 @@ suite('css-slam', () => {
         '}'
       ].join('');
       assert.equal(slam.css(text), expected);
-    })
+    });
     test('comments are removed', () => {
       const text = '/* foo */ :root{}';
       const expected = ':root{}';
@@ -91,7 +91,7 @@ suite('css-slam', () => {
       `;
       const expected = `button{@apply (--whatever);}span{@apply (--whatever);}:host{@apply --whatever;}div{color:red;}`;
       assert.equal(slam.css(text), expected);
-    })
+    });
   });
 
   suite('HTML', () => {
@@ -123,7 +123,7 @@ suite('css-slam', () => {
       const f = new File({
         path: 'foo.css',
         contents: new Buffer('/* foo */ :root { }')
-      })
+      });
       slam.gulp()._transform(f, 'utf-8', (err, file) => {
         if (err) {
           return done(err);
@@ -131,13 +131,13 @@ suite('css-slam', () => {
         assert.equal(f, file);
         assert.equal(f.contents.toString(), ':root{}');
         done();
-      })
+      });
     });
     test('Process html files in stream', (done) => {
       const f = new File({
         path: 'foo.html',
         contents: new Buffer('<!doctype html><style>\n\t:root{\n--foo: red;\n}</style>')
-      })
+      });
       slam.gulp()._transform(f, 'utf-8', (err, file) => {
         if (err) {
           return done(err);
@@ -145,7 +145,7 @@ suite('css-slam', () => {
         assert.equal(f, file);
         assert.equal(f.contents.toString(), '<!DOCTYPE html><html><head><style>:root{--foo:red;}</style></head><body></body></html>');
         done();
-      })
+      });
     });
     test('Leave unknown files in stream alone', (done) => {
       const b = new Buffer('<!doctype html><style>\n\t:root{\n--foo: red;\n}</style>');
@@ -161,6 +161,6 @@ suite('css-slam', () => {
         assert.equal(f.contents, b);
         done();
       });
-    })
+    });
   });
 });
