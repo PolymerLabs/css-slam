@@ -3,6 +3,7 @@
   "version": "2.0.2",
   "description": "Minimal CSS, fast",
   "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "scripts": {
     "test": "tsc && mocha --ui tdd lib/test/*.js && tslint -p ."
   },
