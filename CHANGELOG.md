@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <!-- ## Unreleased -->
 <!-- New PRs should document their changes here. -->
 
+## [2.1.1] - 2018-05-02
+* Updated dependencies and type definitions.
+
 ## [2.1.0] - 2018-03-07
 * Updated dependencies.
 * Convert to TypeScript.
