@@ -66,7 +66,7 @@ export class GulpTransform extends stream.Transform {
     super({objectMode: true});
   }
   _transform(file: vinyl, _encoding: string,
-             callback: (error: Error|null|undefined, file?: vinyl) => void) {
+             callback: (error?: Error, file?: vinyl) => void) {
     if (file.isStream()) {
       return callback(new Error('css-slam does not support streams'));
     }
@@ -80,7 +80,7 @@ export class GulpTransform extends stream.Transform {
         file.contents = new Buffer(css(contents));
       }
     }
-    callback(null, file);
+    callback(undefined, file);
   }
 }
 
