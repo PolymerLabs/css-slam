@@ -1,6 +1,6 @@
 {
   "name": "css-slam",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Minimal CSS, fast",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
