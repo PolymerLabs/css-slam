@@ -45,7 +45,7 @@ interface Args {
   help: boolean;
 }
 
-const args: Args = cliArgs(options);
+const args = cliArgs(options) as Args;
 
 function getUsage() {
   return getCliUsage([
