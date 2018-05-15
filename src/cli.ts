@@ -40,7 +40,7 @@ const options = [
 ];
 
 interface Args {
-  source: string[];
+  source: string;
   type?: 'html'|'css'|'unknown';
   help: boolean;
 }
