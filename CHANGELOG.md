@@ -5,9 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased
-* Update deps for CLI to `npm audit` clean.
+<!-- ## Unreleased -->
 <!-- New PRs should document their changes here. -->
+
+## [2.1.2] - 2018-05-15
+* Update deps for CLI to `npm audit` clean.
 
 ## [2.1.1] - 2018-05-02
 * Updated dependencies and type definitions.
